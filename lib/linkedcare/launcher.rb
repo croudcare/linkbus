@@ -15,5 +15,6 @@ module Linkedcare
       EventMachine.stop
     end
 
+    extend self
   end
 end
