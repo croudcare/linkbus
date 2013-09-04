@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'linkedcare/bus/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "linkedcare-bus"
+  spec.name          = "linkbus"
   spec.version       = Linkedcare::Bus::VERSION
   spec.authors       = ["Thiago Dantas"]
   spec.email         = ["thiago.teixeira.dantas@gmail.com"]
