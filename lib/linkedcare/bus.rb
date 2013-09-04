@@ -16,3 +16,5 @@ require 'linkedcare/subscribers/manager'
 require 'linkedcare/subscribers/subscriber'
 require 'linkedcare/publishers/publisher'
 require 'linkedcare/bus/connection_handler'
+require 'linkedcare/logging'
+

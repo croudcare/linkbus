@@ -2,6 +2,7 @@ require 'yaml'
 require 'singleton'
 require 'optparse'
 require 'rails'
+require 'logger'
 
 require 'linkedcare/bus'
 
@@ -13,7 +14,8 @@ module Linkedcare
     DEFAULTS_CLI_OPTIONS = {
       :app_dir => '.',
       :environment => 'development',
-      :log_file => "log/linkbus.log",
+      :log_file => STDOUT,
+      :log_level => Logger::DEBUG 
       :config_file => "config/linkbus.yml",
     }
 
@@ -25,6 +27,7 @@ module Linkedcare
     
     def parse(args=ARGV)
       options = setup_options(args)
+      setup_logging(options[:log_file], options[:log_level])
       setup_linkedcare_bus(options)
       boot_system(options)
     end
@@ -33,19 +36,18 @@ module Linkedcare
       Linkedcare::Launcher.start
     end
 
-
-    def handle_signals
-      Signal.trap("INT")  { |signo| puts Signal.signame(signo) }
-      Signal.trap("TERM") { |signo| puts Signal.signame(signo) }
+    def setup_logging(file)
+      Linkedcare::Logging.setup(file)
     end
 
     def setup_linkedcare_bus(options)
+      Linkedcare::Logging.logger.info("Setup Linkedcare Bus")
       Linkedcare::Bus::Configurable.config(options[:environment], options[:config_file])
     end
 
     def setup_options(args)
       cli_options = parse_options(args)
-      options = default_options.merge(cli_options)
+      default_options.merge(cli_options)
     end
 
     def boot_system(options)
@@ -73,6 +75,10 @@ module Linkedcare
 
         o.on '-c', '--config PATH', "path to YAML config file" do |arg|
           opts[:config_file] = arg
+        end
+
+        o.on '-l', '--log PATH', "path to log file" do |arg|
+          opts[:log_file] = arg
         end
 
         o.on '-V', '--version', "Print version and exit" do |arg|

@@ -44,7 +44,7 @@ module Linkedcare
 
       class LinkBusConfig
         
-        attr_accessor :config_file, :app_dir, :verbose, :amqp
+        attr_accessor :config_file, :app_dir, :verbose, :amqp, :log_file
         def initialize(options = { })
           @amqp = AMQPConfig.new(options['amqp'])
           @config = parse(options)
@@ -55,7 +55,8 @@ module Linkedcare
           @config_file  = options[:config_file]
           @app_dir      = options[:app_dir]
           @verbose      = options[:verbose]
-        end
+          @log_file     = options[:log_file]
+         end
 
       end
 
