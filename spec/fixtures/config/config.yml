@@ -1,0 +1,13 @@
+test:
+  amqp: 
+    host: 192.168.0.2
+    port: 9998
+    user: name
+    password: password
+    vhost: /vhost
+    bus:   mybus
+
+default:
+  amqp:
+    user: 'test'
+    password: 'pass'

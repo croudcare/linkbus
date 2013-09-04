@@ -1,0 +1,24 @@
+development:
+  app_dir: .
+  environment: development
+  log_file: log/linkbus.log
+  amqp:
+    host: 192.168.0.1
+    port: 9999
+    user: rails
+    password: rails
+    vhost: /vhost_rails
+    bus:   my_rails_bus
+
+production:
+  app_dir: .
+  environment: development
+  log_file: log/linkbus.log
+  amqp:
+    host: 192.168.0.6
+    port: 9996
+    user: rails_prod
+    password: rails_prod
+    vhost: /vhost_rails_prod
+    bus:   my_rails_bus_prod
+

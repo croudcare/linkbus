@@ -1,0 +1,6 @@
+test:
+  amqp:
+    host: 127.0.0.1
+    port: 5672
+    vhost: /
+    bus:   my_rails_bus  
