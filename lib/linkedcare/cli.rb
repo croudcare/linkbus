@@ -15,8 +15,8 @@ module Linkedcare
       :app_dir => '.',
       :environment => 'development',
       :log_file => STDOUT,
-      :log_level => Logger::DEBUG 
-      :config_file => "config/linkbus.yml",
+      :log_level => Logger::DEBUG, 
+      :config_file => "config/linkbus.yml"
     }
 
     DEFAULTS_CLI_OPTIONS.freeze 
