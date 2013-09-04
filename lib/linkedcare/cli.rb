@@ -36,8 +36,8 @@ module Linkedcare
       Linkedcare::Launcher.start
     end
 
-    def setup_logging(file)
-      Linkedcare::Logging.setup(file)
+    def setup_logging(file, level)
+      Linkedcare::Logging.setup(file, level)
     end
 
     def setup_linkedcare_bus(options)
