@@ -4,13 +4,12 @@ module Linkedcare
     def start
 
       EM.run do 
-        
-        Signal.trap("INT")  { puts "int"; EventMachine.stop }
-        Signal.trap("TERM") { puts "TERM"; EventMachine.stop }
-
-        AMQP.connect(Linkedcare::Bus::Configurable.amqp_options) do |connection|
+        connection = AMQP.connect(Linkedcare::Bus::Configurable.amqp_options) do |connection|
           Linkedcare::Bus::ConnectionHandler.new(connection).setup
         end
+
+        Signal.trap("INT")  { puts "int"; connection.close { EventMachine.stop } }
+        Signal.trap("TERM") { puts "TERM"; connection.close { EventMachine.stop } }
         
       end
 
