@@ -30,7 +30,7 @@ module Linkedcare
     end
 
     def run
-      Linkedcare::Laucher.start
+      Linkedcare::Launcher.start
     end
 
     def setup_linkedcare_bus(options)
