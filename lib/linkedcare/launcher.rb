@@ -8,15 +8,11 @@ module Linkedcare
           Linkedcare::Bus::ConnectionHandler.new(connection).setup
         end
 
-        Signal.trap("INT")  { puts "int"; connection.close { EventMachine.stop } }
-        Signal.trap("TERM") { puts "TERM"; connection.close { EventMachine.stop } }
+        Signal.trap("INT")  { AMQP.stop { EventMachine.stop }  }
+        Signal.trap("TERM") { AMQP.stop { EventMachine.stop }  }
         
       end
 
-    end
-
-    def stop
-      EventMachine.stop
     end
 
     extend self
