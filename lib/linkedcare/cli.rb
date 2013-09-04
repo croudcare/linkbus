@@ -33,6 +33,12 @@ module Linkedcare
       Linkedcare::Launcher.start
     end
 
+
+    def handle_signals
+      Signal.trap("INT")  { |signo| puts Signal.signame(signo) }
+      Signal.trap("TERM") { |signo| puts Signal.signame(signo) }
+    end
+
     def setup_linkedcare_bus(options)
       Linkedcare::Bus::Configurable.config(options[:environment], options[:config_file])
     end
