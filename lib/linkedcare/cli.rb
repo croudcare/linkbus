@@ -30,6 +30,7 @@ module Linkedcare
     end
 
     def run
+      Linkedcare::Laucher.start
     end
 
     def setup_linkedcare_bus(options)
@@ -44,11 +45,8 @@ module Linkedcare
     def boot_system(options)
       ENV['RACK_ENV'] = ENV['RAILS_ENV'] = options[:environment]
       raise ArgumentError, "#{options[:app_dir]} does not exist" unless File.exist?(options[:app_dir])
-      puts "loading rails"
-      puts "loaded #{options[:environment]}"
-      p options
-      #require File.expand_path("#{options[:app_dir]}/config/environment.rb")
-      #::Rails.application.eager_load!
+      require File.expand_path("#{options[:app_dir]}/config/environment.rb")
+      ::Rails.application.eager_load!
     end
 
     def parse_options(argv)
