@@ -12,7 +12,7 @@ module Linkedcare
 
     def self.setup(file, level = Logger::INFO)
       close_logger
-      initialize_logger(Linkedcare::Config.logger_file)
+      initialize_logger(file, level)
     end
 
 
@@ -24,7 +24,7 @@ module Linkedcare
       @logger.close if @logger && !$TESTING
     end
 
-    def self.initialize_logger(level, file)
+    def self.initialize_logger(file, level)
       @logger = Logger.new(file)
       @logger.level = level
       @logger.formatter = Beauty.new
