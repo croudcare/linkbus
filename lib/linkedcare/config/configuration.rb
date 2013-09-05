@@ -52,6 +52,7 @@ module Linkedcare
         @app_dir      = options[:app_dir]     || "."
         @log_file     = options[:log_file]    || "log/linkbus.log"
         @log_level    = options[:log_level]   || Logger::DEBUG
+        @environment  = options[:environment] || "development"
         @amqp         = AMQPConfig.new(options[:amqp] || { })
       end
 
