@@ -12,10 +12,16 @@ describe Linkedcare::Bus::Publisher do
     described_class.publish('message', 'key')
   end
 
-  it "raises error when try to send message with nil key" do
-    expect{ described_class.publish('message', nil) }.to raise_error
-  end
+  context "Invalid key" do 
+    it "returns false when try to send message with nil key" do
+      expect(described_class.publish('message', nil)).to be_false
+    end
 
+    it "add to errors the cause" do
+      expect(described_class.publish('message', nil)).to be_false
+    end
+  end
+  
   pending "Verify if connection close with success."
 
 end

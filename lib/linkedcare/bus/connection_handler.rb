@@ -11,6 +11,7 @@ module Linkedcare
       end
 
       def setup
+        Linkedcare::Logging.info("Setting up subscribers")
         register_subscribers
       end
 
@@ -26,8 +27,9 @@ module Linkedcare
 
       def register(channel, subscriber)
         exchange = channel.topic(@bus, :durable => true)
+        Linkedcare::Logging.info("Registering subscriber to Topic Exchange [ #{@bus} ], Subscriber #{subscriber}")
         
-        channel.queue(subscriber.queue, :durable => true) do |queue|
+        channel.queue(subscriber.queue, :durable => true) do | queue |
           bind(queue,exchange, subscriber.key)
           subscribe(queue, subscriber)
         end
@@ -39,6 +41,7 @@ module Linkedcare
 
       def subscribe(queue, subscriber)
         queue.subscribe(:ack => true) do |meta, data|
+          Linkedcare::Logging.info("Message Received: [ #{ message } ], Meta: [ #{ meta } ], Subscriber: #{ subscriber }")
           subscriber.handler.call(meta, data)
           meta.ack
         end

@@ -15,6 +15,10 @@ module Linkedcare
         @queue_name || ( @queue_name =  normalize(@key) )
       end
 
+      def to_s
+        "{ key: [ #{@key} ], Queue: [ #{ @queue_name} ] }"
+      end
+
       private
 
       def blank(val)

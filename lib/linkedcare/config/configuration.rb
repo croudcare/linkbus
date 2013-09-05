@@ -17,6 +17,7 @@ module Linkedcare
       AMQP_DEFAULT_OPTIONS.freeze
 
       class AMQPConfig
+        
         attr_accessor :host, :port, :user, :password, :vhost, :bus, :heartbeat
         def initialize(options = {})
             @host       = options['host']      || '127.0.0.1'
@@ -26,6 +27,10 @@ module Linkedcare
             @vhost      = options['vhost']     || '/'
             @bus        = options['bus']       || 'bus'
             @heartbeat  = options['heartbeat'] || 20
+        end
+
+        def to_s
+          "host: [ #{host}], port: [ #{port} ], user: [ #{user} ], password: [ #{password} ], vhost: [ #{vhost} ], bus: [ #{bus} ], heartbeat: [ #{heartbeat} ]"
         end
 
         def options
@@ -39,24 +44,27 @@ module Linkedcare
           hash[:heartbeat] = @heartbeat
           hash
         end
-
       end
 
       class LinkBusConfig
         
-        attr_accessor :config_file, :app_dir, :verbose, :amqp, :log_file
+        attr_accessor :config_file, :app_dir, :amqp, :log_file
         def initialize(options = { })
-          @amqp = AMQPConfig.new(options['amqp'])
           @config = parse(options)
         end
 
+        def to_s
+          "{ config_file: [ #{config_file} ], app_dir: [ #{app_dir} ], log_file: [ #{log_file} ], amqp: { #{amqp.to_s}  } }"
+        end
+
         private
+
         def parse(options)
-          @config_file  = options[:config_file]
-          @app_dir      = options[:app_dir]
-          @verbose      = options[:verbose]
-          @log_file     = options[:log_file]
-         end
+          @config_file  = options['config_file']
+          @app_dir      = options['app_dir']
+          @log_file     = options['log_file']
+          @amqp         = AMQPConfig.new(options['amqp'])
+        end
 
       end
 
@@ -75,8 +83,11 @@ module Linkedcare
       private
       def self.load(env, path)
         raise 'Missing Config File' if path.nil?
+        Linkedcare::Logging.info("Loading linkbus configuration '#{path}' for environment '#{env}'")
         config_file_options = ::YAML::load_file(path)
-        LinkBusConfig.new(config_file_options[env])
+        options = config_file_options[env] rescue {}
+        raise "Environment [ #{env} ] not found in [ #{path} ] " if options.empty?
+        LinkBusConfig.new(options)
       end
     end
 

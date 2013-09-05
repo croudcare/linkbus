@@ -24,6 +24,10 @@ def expected_test_env(config)
   expect(config.bus).to eql('mybus')
 end
 
+def disable_log
+  Linkedcare::Logging.setup("/dev/null")
+end
+
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
@@ -36,6 +40,8 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 
+  config.before { disable_log }
+    
   config.before(:each) do
     Linkedcare::Bus::Configurable.instance_eval do
       @config = nil

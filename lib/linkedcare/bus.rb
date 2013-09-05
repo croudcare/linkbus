@@ -1,7 +1,5 @@
 module Linkedcare
-  module Bus
-    
-  end
+ 
 end
 
 require 'eventmachine'

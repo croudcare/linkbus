@@ -3,6 +3,7 @@ require 'singleton'
 require 'optparse'
 require 'rails'
 require 'logger'
+require 'pry'
 
 require 'linkedcare/bus'
 
@@ -29,7 +30,12 @@ module Linkedcare
       options = setup_options(args)
       setup_logging(options[:log_file], options[:log_level])
       setup_linkedcare_bus(options)
-      boot_system(options)
+      info("Booting your application with configuration: #{Linkedcare::Bus::Configurable.config}")
+      #boot_system(options)
+    end
+
+    def info(message)  
+      Linkedcare::Logging.info(message)
     end
 
     def run
@@ -53,6 +59,7 @@ module Linkedcare
     def boot_system(options)
       ENV['RACK_ENV'] = ENV['RAILS_ENV'] = options[:environment]
       raise ArgumentError, "#{options[:app_dir]} does not exist" unless File.exist?(options[:app_dir])
+
       require File.expand_path("#{options[:app_dir]}/config/environment.rb")
       ::Rails.application.eager_load!
     end
