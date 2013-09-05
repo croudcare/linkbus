@@ -41,7 +41,7 @@ module Linkedcare
 
       def subscribe(queue, subscriber)
         queue.subscribe(:ack => true) do |meta, data|
-          Linkedcare::Logging.info("Message Received: [ #{ message } ], Meta: [ #{ meta } ], Subscriber: #{ subscriber }")
+          Linkedcare::Logging.info("Message Received: [ #{ data } ], Meta: [ #{ meta } ], Subscriber: #{ subscriber }")
           subscriber.handler.call(meta, data)
           meta.ack
         end
