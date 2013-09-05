@@ -1,6 +1,5 @@
 require 'logger'
 require 'date'
-require 'pry'
 
 module Linkedcare
   module Logging

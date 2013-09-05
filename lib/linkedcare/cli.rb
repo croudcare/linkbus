@@ -3,7 +3,6 @@ require 'singleton'
 require 'optparse'
 require 'rails'
 require 'logger'
-require 'pry'
 
 require 'linkedcare/bus'
 
@@ -12,8 +11,16 @@ module Linkedcare
   class CLI
     include Singleton
 
+    CLI_DEFAULT_OPTIONS = {
+      :app_dir => '.',
+      :environment => 'development',
+      :log_file => "log/linkbus.log",
+      :log_level => Logger::DEBUG, 
+      :config_file => "config/linkbus.yml"
+    }
+
     def parse(args = ARGV)
-      options = setup_cli_options(args)
+      options = parse_options(args)
       Linkedcare::Launcher.setup(options)
       info("Booting your application with configuration: #{Linkedcare::Configurable.config}")
       boot_system(options)
@@ -27,10 +34,6 @@ module Linkedcare
       Linkedcare::Launcher.start
     end
 
-    def setup_cli_options(args)
-      parse_options(args)
-    end
-
     def boot_system(options)
       ENV['RACK_ENV'] = ENV['RAILS_ENV'] = options[:environment]
       app_dir = Linkedcare::Configurable.config.app_dir
@@ -41,7 +44,7 @@ module Linkedcare
     end
 
     def parse_options(argv)
-      opts = { }
+      opts = CLI_DEFAULT_OPTIONS.dup
 
       @parser = OptionParser.new do |o|
         o.on '-e', '--environment ENV', "Application environment" do |arg|
@@ -50,10 +53,6 @@ module Linkedcare
 
         o.on '-a', '--app [PATH|DIR]', "Location of Rails application" do |arg|
           opts[:app_dir] = arg
-        end
-
-        o.on "-v", "--verbose", "Print more verbose output" do |arg|
-          opts[:verbose] = arg
         end
 
         o.on '-c', '--config PATH', "path to YAML config file" do |arg|
@@ -68,7 +67,6 @@ module Linkedcare
           puts "Linkbus #{Linkedcare::Bus::VERSION}"
           exit(0)
         end
-
       end
 
       @parser.banner = "linkbus [options]"
