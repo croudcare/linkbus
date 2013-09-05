@@ -11,14 +11,6 @@ module Linkedcare
   class CLI
     include Singleton
 
-    CLI_DEFAULT_OPTIONS = {
-      :app_dir => '.',
-      :environment => 'development',
-      :log_file => "log/linkbus.log",
-      :log_level => Logger::DEBUG, 
-      :config_file => "config/linkbus.yml"
-    }
-
     def parse(args = ARGV)
       options = parse_options(args)
       Linkedcare::Launcher.setup(options)
@@ -44,7 +36,7 @@ module Linkedcare
     end
 
     def parse_options(argv)
-      opts = CLI_DEFAULT_OPTIONS.dup
+      opts = {}
 
       @parser = OptionParser.new do |o|
         o.on '-e', '--environment ENV', "Application environment" do |arg|

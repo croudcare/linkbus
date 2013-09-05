@@ -48,7 +48,7 @@ module Linkedcare
       end
 
       def setup(options)
-        @config_file  = options[:config_file] || "log/linkbus.yml"
+        @config_file  = options[:config_file] || "config/linkbus.yml"
         @app_dir      = options[:app_dir]     || "."
         @log_file     = options[:log_file]    || "log/linkbus.log"
         @log_level    = options[:log_level]   || Logger::DEBUG

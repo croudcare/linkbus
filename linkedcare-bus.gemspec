@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake" , "=10.1.0"
   spec.add_development_dependency "mocha", "=0.14.0"
   spec.add_development_dependency "rails", "3.2.13"
+  spec.add_development_dependency "pry"
 
 
 
