@@ -12,26 +12,11 @@ module Linkedcare
   class CLI
     include Singleton
 
-    DEFAULTS_CLI_OPTIONS = {
-      :app_dir => '.',
-      :environment => 'development',
-      :log_file => STDOUT,
-      :log_level => Logger::DEBUG, 
-      :config_file => "config/linkbus.yml"
-    }
-
-    DEFAULTS_CLI_OPTIONS.freeze 
-
-    def default_options
-      DEFAULTS_CLI_OPTIONS.dup 
-    end
-    
-    def parse(args=ARGV)
-      options = setup_options(args)
-      setup_logging(options[:log_file], options[:log_level])
-      setup_linkedcare_bus(options)
-      info("Booting your application with configuration: #{Linkedcare::Bus::Configurable.config}")
-      #boot_system(options)
+    def parse(args = ARGV)
+      options = setup_cli_options(args)
+      Linkedcare::Launcher.setup(options)
+      info("Booting your application with configuration: #{Linkedcare::Configurable.config}")
+      boot_system(options)
     end
 
     def info(message)  
@@ -42,25 +27,16 @@ module Linkedcare
       Linkedcare::Launcher.start
     end
 
-    def setup_logging(file, level)
-      Linkedcare::Logging.setup(file, level)
-    end
-
-    def setup_linkedcare_bus(options)
-      Linkedcare::Logging.logger.info("Setup Linkedcare Bus")
-      Linkedcare::Bus::Configurable.config(options[:environment], options[:config_file])
-    end
-
-    def setup_options(args)
-      cli_options = parse_options(args)
-      default_options.merge(cli_options)
+    def setup_cli_options(args)
+      parse_options(args)
     end
 
     def boot_system(options)
       ENV['RACK_ENV'] = ENV['RAILS_ENV'] = options[:environment]
-      raise ArgumentError, "#{options[:app_dir]} does not exist" unless File.exist?(options[:app_dir])
+      app_dir = Linkedcare::Configurable.config.app_dir
+      raise ArgumentError, "#{app_dir} does not exist" unless File.exist?(app_dir)
 
-      require File.expand_path("#{options[:app_dir]}/config/environment.rb")
+      require File.expand_path("#{app_dir}/config/environment.rb")
       ::Rails.application.eager_load!
     end
 

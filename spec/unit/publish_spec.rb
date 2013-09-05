@@ -2,7 +2,7 @@ describe Linkedcare::Bus::Publisher do
 
   before(:each) do
     config_file = File.expand_path('../fixtures/config/connection_config.yml', File.dirname(__FILE__))
-    @options = Linkedcare::Bus::Configurable.config('test', config_file).amqp.options
+    @options = Linkedcare::Configurable.config('test', config_file).amqp.options
   end
 
   it "publishes messages to specific routing key" do

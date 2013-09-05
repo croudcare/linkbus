@@ -7,7 +7,7 @@ module Linkedcare
       
       def initialize(session)
         @connection = session
-        @bus = Linkedcare::Bus::Configurable.amqp.bus
+        @bus = Linkedcare::Configurable.amqp.bus
       end
 
       def setup

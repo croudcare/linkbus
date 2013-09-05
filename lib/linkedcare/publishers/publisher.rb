@@ -8,7 +8,7 @@ module Linkedcare
       
       attr_accessor :errors
       def initialize
-        @config = Linkedcare::Bus::Configurable.amqp
+        @config = Linkedcare::Configurable.amqp
         @errors = []
       end
 

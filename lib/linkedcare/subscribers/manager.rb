@@ -43,6 +43,7 @@ module Linkedcare
 
       def self.register(&block)
         raise 'Must pass block' unless block_given?
+        Linkedcare::Launcher.setup unless Linkedcare::Launcher.setup?
         block.call(self.manager)
       end
       extend self
