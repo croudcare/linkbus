@@ -22,11 +22,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "=2.14.1"
   spec.add_development_dependency "rake" , "=10.1.0"
   spec.add_development_dependency "mocha", "=0.14.0"
+  spec.add_development_dependency "rails", "3.2.13"
+
+
 
   spec.add_dependency "active_model_serializers", "0.8.1"
   spec.add_dependency "eventmachine" , "1.0.3"
   spec.add_dependency "bunny", "0.10.5"
   spec.add_dependency "amqp", "1.0.2"
-  spec.add_dependency "active_support", "~> 3"
 
 end
