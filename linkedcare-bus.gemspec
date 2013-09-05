@@ -27,6 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "eventmachine" , "1.0.3"
   spec.add_dependency "bunny", "0.10.5"
   spec.add_dependency "amqp", "1.0.2"
-  spec.add_dependency "active_support"
+  spec.add_dependency "active_support", ">= 3"
 
 end
