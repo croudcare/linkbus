@@ -14,7 +14,7 @@ module Linkedcare
     end
 
     def amqp
-      Options::AMQP.new(options[:amqp])
+      Options::AMQP.new(options[:amqp].with_indifferent_access)
     end
 
   end #linkbus class
