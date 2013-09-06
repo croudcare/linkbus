@@ -4,14 +4,15 @@ module Linkedcare
     class ConnectionHandler
 
       attr_accessor :connection
+      include Linkedcare::Logging
       
       def initialize(session)
         @connection = session
-        @bus = Linkedcare::Configurable.amqp.bus
+        @bus = Linkedcare::Configuration.amqp.bus
       end
 
       def setup
-        Linkedcare::Logging.info("Setting up subscribers")
+        log_info("Setting up subscribers")
         register_subscribers
       end
 
@@ -27,7 +28,7 @@ module Linkedcare
 
       def register(channel, subscriber)
         exchange = channel.topic(@bus, :durable => true)
-        Linkedcare::Logging.info("Registering subscriber to Topic Exchange [ #{@bus} ], Subscriber #{subscriber}")
+        log_info("Registering subscriber to Topic Exchange [ #{@bus} ], Subscriber #{subscriber}")
         
         channel.queue(subscriber.queue, :durable => true) do | queue |
           bind(queue,exchange, subscriber.key)
@@ -41,7 +42,7 @@ module Linkedcare
 
       def subscribe(queue, subscriber)
         queue.subscribe(:ack => true) do |meta, data|
-          Linkedcare::Logging.info("Message Received: [ #{ data } ], Meta: [ #{ meta } ], Subscriber: #{ subscriber }")
+          log_info("Message Received: [ #{ data } ], Meta: [ #{ meta } ], Subscriber: #{ subscriber }")
           subscriber.handler.call(meta, data)
           meta.ack
         end

@@ -1,10 +1,11 @@
 module Linkedcare
   module Launcher
-    
+    include Linkedcare::Logging
+
     def start
-      Linkedcare::Logging.info("Launching Linkbus EM")
+      log_info("Launching Linkbus EM")
       EM.run do 
-        AMQP.connect(Linkedcare::Configurable.amqp_options) do |connection|
+        AMQP.connect(Linkedcare::Configuration.amqp_options) do |connection|
           connection_handler(connection)
         end
       end
@@ -20,18 +21,17 @@ module Linkedcare
     end
 
     private
-
     def connection_handler(connection)
-      Linkedcare::Logging.info("Connection stabilished with Broker")
+      log_info("Connection stabilished with Broker")
       Linkedcare::Bus::ConnectionHandler.new(connection).setup
       register_signals(connection)
     end
 
     def register_signals(connection)
       Signal.trap("INT")  do
-        Linkedcare::Logging.info("Disconnecting from Broker")
+        log_info("Disconnecting from Broker")
         connection.disconnect do
-          Linkedcare::Logging.info("Disconnected") 
+          log_info("Disconnected [ DONE ]") 
           EventMachine.stop
         end  
       end
@@ -42,9 +42,9 @@ module Linkedcare
     end
 
     def setup_linkedcare_bus(options)
-      Linkedcare::Configurable.setup(options)
-      setup_logging( Linkedcare::Configurable.config.log_file, Linkedcare::Configurable.config.log_level )
-      Linkedcare::Logging.logger.info("Setting up Linkedcare Bus [ DONE ]")
+      Linkedcare::Configuration.setup(options)
+      setup_logging( Linkedcare::Configuration.config.log_file, Linkedcare::Configuration .config.log_level )
+      log_info("Setting up Linkedcare Bus [ DONE ]")
     end
 
     extend self

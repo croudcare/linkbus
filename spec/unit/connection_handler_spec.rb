@@ -11,7 +11,7 @@ describe Linkedcare::Bus::ConnectionHandler do
 
   before(:each) do
     config_file = File.expand_path('../fixtures/config/connection_config.yml', File.dirname(__FILE__))
-    @options = Linkedcare::Configurable.config('test', config_file).amqp.options
+    @options = Linkedcare::Configuration.config('test', config_file).amqp.options
   end
 
   it "register one subscribers" do

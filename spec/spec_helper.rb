@@ -43,7 +43,7 @@ RSpec.configure do |config|
   config.before { disable_log }
     
   config.before(:each) do
-    Linkedcare::Configurable.instance_eval do
+    Linkedcare::Configuration.instance_eval do
       @config = nil
     end
 

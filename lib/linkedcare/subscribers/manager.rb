@@ -2,6 +2,8 @@ module Linkedcare
   module Bus
 
     class SubscriberManager
+      include Linkedcare::Logging
+      
       attr_reader :subscribers
       def initialize
         @subscribers = { }
@@ -19,7 +21,7 @@ module Linkedcare
       private
 
       def add(subscriber)
-        Linkedcare::Logging.info("Add subscriber Routing Key: [ #{subscriber.key} ], Queue: [ #{subscriber.queue} ], Handler Class: [#{subscriber.handler.class} ]")
+        log_info("Add subscriber Routing Key: [ #{subscriber.key} ], Queue: [ #{subscriber.queue} ], Handler Class: [#{subscriber.handler.class} ]")
         handlers = @subscribers[subscriber.queue] || []
         handlers.push(subscriber)
         @subscribers[subscriber.queue] = handlers

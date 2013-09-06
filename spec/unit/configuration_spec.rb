@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Linkedcare::Configurable do
+describe Linkedcare::Configuration do
 
   before do
     @config_file = File.expand_path('../fixtures/config/config.yml', File.dirname(__FILE__))

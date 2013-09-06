@@ -1,6 +1,7 @@
 module Linkedcare
   module Bus
     class Publisher
+      include Linkedcare::Logging
 
       def self.publish(message, key)
         new.publish(message, key)
@@ -8,12 +9,12 @@ module Linkedcare
       
       attr_accessor :errors
       def initialize
-        @config = Linkedcare::Configurable.amqp
+        @config = Linkedcare::Configuration.amqp
         @errors = []
       end
 
       def publish(message, key)
-        Linkedcare::Logging.info("Publishing message [ #{message} ], key: [ #{key} ]")
+        log_info("Publishing message [ #{message} ], key: [ #{key} ]")
         raise ArgumentError, "key cannot be nil" if key.nil?
         with_exchange do |topic| 
           topic.publish(message, :routing_key => key)
@@ -21,7 +22,7 @@ module Linkedcare
         return true
         rescue StandardError => e
           errors.push(e)
-          Linkedcare::Logging.fatal("Publishing message [ #{message} ], key: [ #{key} ]", e )
+          log_fatal("Publishing message [ #{message} ], key: [ #{key} ]", e )
           return false
       end
 
