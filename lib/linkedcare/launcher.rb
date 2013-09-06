@@ -11,12 +11,14 @@ module Linkedcare
     def from_cli
       log_info("Launching Linkbus EM")
       EM.run do 
-        AMQP.connect(Linkedcare::Configuration.amqp_options) do |connection|
+        options = Linkedcare::Configuration.amqp_options
+        log_info("Connecting with #{options}")
+        AMQP.connect(options) do |connection|
           connection_handler(connection)
         end
       end
     end
-    
+
     def connection_handler(connection)
       log_info("Connection estabilished with Broker")
       Linkedcare::Connection::Handler.new(connection).setup

@@ -8,7 +8,6 @@ begin
   cli.parse
   cli.run
 rescue => e
-  $LINKBUS_CLI = false
   raise e if $DEBUG
   STDERR.puts e.message
   STDERR.puts e.backtrace.join("\n")
