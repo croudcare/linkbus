@@ -1,0 +1,1 @@
+require 'linkedcare/pub/publisher'

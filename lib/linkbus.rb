@@ -1,1 +1,1 @@
-require "linkedcare/bus"
+require "linkedcare/setup"

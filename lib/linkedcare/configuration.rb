@@ -1,5 +1,6 @@
 require 'active_support'
 require 'active_support/core_ext/hash/indifferent_access'
+require 'yaml'
 
 module Linkedcare
   module Configuration

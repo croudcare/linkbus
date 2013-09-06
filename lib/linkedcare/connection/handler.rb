@@ -19,7 +19,7 @@ module Linkedcare
       private
       def register_subscribers
         log_info("Registering [ Start ]")
-        manager = Linkedcare::Bus::Subscribers.manager
+        manager = Linkedcare::Subscribers.manager
         manager.subscribers.each do |key, val|
           val.each do |subscriber|
             register(::AMQP::Channel.new(connection), subscriber)

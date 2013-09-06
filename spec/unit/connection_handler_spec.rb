@@ -15,7 +15,7 @@ describe Linkedcare::Bus::ConnectionHandler do
   end
 
   it "register one subscribers" do
-    Linkedcare::Bus::Subscribers.register do |subscriber|
+    Linkedcare::Subscribers.register do |subscriber|
       subscriber.handle 'pattern.#', Proc.new { 'xxx' }
     end
     
@@ -32,7 +32,7 @@ describe Linkedcare::Bus::ConnectionHandler do
   end
 
   it "register two subscribers" do
-    Linkedcare::Bus::Subscribers.register do |subscriber|
+    Linkedcare::Subscribers.register do |subscriber|
       subscriber.handle 'first.#', Proc.new { 'xxx' }
       subscriber.handle 'second.#', Proc.new { 'xxx' }
     end

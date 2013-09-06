@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Linkedcare::Bus::SubscriberManager do
+describe Linkedcare::SubscriberManager do
 
   let(:pattern) { 'pattern.*' }
   let(:queue) { 'queue_name' }
@@ -8,11 +8,11 @@ describe Linkedcare::Bus::SubscriberManager do
 
   let(:handler_two) { Proc.new { 'val 2' } }
 
-  let(:subscriber) { Linkedcare::Bus::Subscriber.new(pattern, handler, queue ) }
-  let(:subscriber_two) { Linkedcare::Bus::Subscriber.new(pattern, handler_two, queue ) }
+  let(:subscriber) { Linkedcare::Subscriber.new(pattern, handler, queue ) }
+  let(:subscriber_two) { Linkedcare::Subscriber.new(pattern, handler_two, queue ) }
 
   before(:each) do
-    @manager =  Linkedcare::Bus::SubscriberManager.new
+    @manager =  Linkedcare::SubscriberManager.new
   end
 
   it 'adds subscribers' do

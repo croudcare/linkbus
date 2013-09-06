@@ -3,10 +3,12 @@
 require_relative '../lib/linkedcare/cli'
 
 begin
+  $LINKBUS_CLI = true
   cli = Linkedcare::CLI.instance
   cli.parse
   cli.run
 rescue => e
+  $LINKBUS_CLI = false
   raise e if $DEBUG
   STDERR.puts e.message
   STDERR.puts e.backtrace.join("\n")

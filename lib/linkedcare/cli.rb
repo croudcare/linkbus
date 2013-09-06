@@ -2,9 +2,8 @@ require 'yaml'
 require 'singleton'
 require 'optparse'
 require 'rails'
-require 'logger'
-
-require 'linkedcare/bus'
+require 'singleton'
+require 'linkedcare/cli/setup'
 
 module Linkedcare
   
@@ -20,7 +19,6 @@ module Linkedcare
     end
 
     def run
-      $LINKBUS_CLI = true
       Linkedcare::Launcher.start
     end
 

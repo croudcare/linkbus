@@ -18,11 +18,6 @@ require 'linkedcare/configuration'
 #linkbus Launcher
 require 'linkedcare/launcher'
 
-#subscribers
-require 'linkedcare/sub/manager'
-require 'linkedcare/sub/subscriber'
-require 'linkedcare/connection/handler'
-
 #publishers
 require 'linkedcare/pub/publisher'
 

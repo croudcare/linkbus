@@ -47,7 +47,7 @@ RSpec.configure do |config|
       @config = nil
     end
 
-    Linkedcare::Bus::Subscribers.instance_eval do
+    Linkedcare::Subscribers.instance_eval do
       @manager = nil
     end
   end

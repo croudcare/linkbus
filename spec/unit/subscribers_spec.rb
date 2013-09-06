@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Linkedcare::Bus::Subscribers do
+describe Linkedcare::Subscribers do
 
   # teardown
   after(:each) do
@@ -10,15 +10,15 @@ describe Linkedcare::Bus::Subscribers do
   end
 
   it 'responds to manager' do
-    expect(Linkedcare::Bus::Subscribers).to respond_to(:manager)
+    expect(Linkedcare::Subscribers).to respond_to(:manager)
   end
 
   it 'responds to register' do
-    expect(Linkedcare::Bus::Subscribers).to respond_to(:register)
+    expect(Linkedcare::Subscribers).to respond_to(:register)
   end
 
-  it 'returns manager of type Linkedcare::Bus::SubscriberManager' do
-    expect(Linkedcare::Bus::Subscribers.manager).to be_an(Linkedcare::Bus::SubscriberManager)
+  it 'returns manager of type Linkedcare::SubscriberManager' do
+    expect(Linkedcare::Subscribers.manager).to be_an(Linkedcare::SubscriberManager)
   end
 
   it 'registers subscribers' do

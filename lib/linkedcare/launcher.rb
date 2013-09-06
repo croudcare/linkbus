@@ -3,11 +3,7 @@ module Linkedcare
     include Linkedcare::Logging
 
     def start
-      if(!!$LINKBUS_CLI) 
-        from_cli
-      else 
-        from_app
-      end
+      from_cli
     end
 
     private
@@ -20,12 +16,7 @@ module Linkedcare
         end
       end
     end
-
-    def from_app
-      configuration = Linkedcare::Configuration.setup
-      Linkedcare::Logging.setup(configuration.log_file, configuration.log_level) 
-    end
-
+    
     def connection_handler(connection)
       log_info("Connection estabilished with Broker")
       Linkedcare::Connection::Handler.new(connection).setup

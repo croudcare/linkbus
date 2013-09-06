@@ -1,6 +1,5 @@
 module Linkedcare
-  module Bus
-    class Subscriber
+  class Subscriber
       attr_reader :key, :handler
 
       def initialize(key, handler, queue_name = nil)
@@ -34,6 +33,5 @@ module Linkedcare
         key.encode(Encoding.find('ASCII'), { :invalid => :replace, :undef => :replace, :replace => '' })
       end
 
-    end
   end
 end
