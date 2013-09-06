@@ -20,6 +20,7 @@ module Linkedcare
     end
 
     def run
+      $LINKBUS_CLI = true
       Linkedcare::Launcher.start
     end
 
