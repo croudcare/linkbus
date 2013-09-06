@@ -3,8 +3,11 @@ module Linkedcare
     include Linkedcare::Logging
 
     def start
-      if (!!$LINKBUS_CLI) from_cli
-      else from_app
+      if(!!$LINKBUS_CLI) 
+        from_cli
+      else 
+        from_app
+      end
     end
 
     private
