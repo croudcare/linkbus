@@ -1,17 +1,28 @@
 require 'eventmachine'
+require 'singleton'
 require 'bunny'
 require 'amqp'
 require 'yaml'
 
+require 'linkedcare/version'
+
+#logging
 require 'linkedcare/logging'
-require 'linkedcare/bus/version'
-require 'linkedcare/config/options'
-require 'linkedcare/config/amqp'
-require 'linkedcare/config/runtime'
-require 'linkedcare/config/configuration'
+
+#Configuration Options
+require 'linkedcare/options/options'
+require 'linkedcare/options/amqp'
+require 'linkedcare/options/runtime'
+require 'linkedcare/configuration'
+
+#linkbus Launcher
 require 'linkedcare/launcher'
-require 'linkedcare/config/configuration'
-require 'linkedcare/subscribers/manager'
-require 'linkedcare/subscribers/subscriber'
-require 'linkedcare/publishers/publisher'
-require 'linkedcare/bus/connection_handler'
+
+#subscribers
+require 'linkedcare/sub/manager'
+require 'linkedcare/sub/subscriber'
+require 'linkedcare/connection/handler'
+
+#publishers
+require 'linkedcare/pub/publisher'
+

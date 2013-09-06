@@ -1,7 +1,7 @@
 module Linkedcare
-  module Bus
+  module Connection
 
-    class ConnectionHandler
+    class Handler
 
       attr_accessor :connection
       include Linkedcare::Logging

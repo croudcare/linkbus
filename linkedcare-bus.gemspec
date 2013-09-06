@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'linkedcare/bus/version'
+require 'linkedcare/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "linkbus"
-  spec.version       = Linkedcare::Bus::VERSION
+  spec.version       = Linkedcare::VERSION
   spec.authors       = ["Thiago Dantas"]
   spec.email         = ["thiago.teixeira.dantas@gmail.com"]
   spec.description   = %q{Message Bus Abstraction}

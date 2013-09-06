@@ -23,7 +23,7 @@ module Linkedcare
     private
     def connection_handler(connection)
       log_info("Connection stabilished with Broker")
-      Linkedcare::Bus::ConnectionHandler.new(connection).setup
+      Linkedcare::Connection::Handler.new(connection).setup
       register_signals(connection)
     end
 
@@ -35,16 +35,6 @@ module Linkedcare
           EventMachine.stop
         end  
       end
-    end
-
-    def setup_logging(file, level)
-      Linkedcare::Logging.setup(file, level)
-    end
-
-    def setup_linkedcare_bus(options)
-      Linkedcare::Configuration.setup(options)
-      setup_logging( Linkedcare::Configuration.config.log_file, Linkedcare::Configuration .config.log_level )
-      log_info("Setting up Linkedcare Bus [ DONE ]")
     end
 
     extend self
