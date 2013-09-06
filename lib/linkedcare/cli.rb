@@ -28,8 +28,8 @@ module Linkedcare
       # app_dir = Linkedcare::Configuration.config.app_dir
       # raise ArgumentError, "#{app_dir} does not exist" unless File.exist?(app_dir)
       app_dir = '.'
-      #require File.expand_path("#{app_dir}/config/environment.rb")
-      #::Rails.application.eager_load!
+      require File.expand_path("#{app_dir}/config/environment.rb")
+      ::Rails.application.eager_load!
     end
 
     def parse_options(argv)

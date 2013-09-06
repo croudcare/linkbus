@@ -11,18 +11,9 @@ module Linkedcare
       end
     end
 
-    def setup(options = { })
-      setup_linkedcare_bus(options)
-      @setup = true
-    end
-
-    def setup?
-      @setup || false
-    end
-
     private
     def connection_handler(connection)
-      log_info("Connection stabilished with Broker")
+      log_info("Connection estabilished with Broker")
       Linkedcare::Connection::Handler.new(connection).setup
       register_signals(connection)
     end
