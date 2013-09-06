@@ -11,7 +11,7 @@ module Linkedcare
     include Singleton
     include Linkedcare::Logging
 
-    def parse(args = ARGV)
+    def parse(args)
       configuration = Linkedcare::Configuration.setup(parse_options(args))
       Linkedcare::Logging.setup(configuration.log_file, configuration.log_level)      
       log_info("Booting your application with configuration: #{Linkedcare::Configuration.runtime} --- #{Linkedcare::Configuration.amqp}")
@@ -27,8 +27,8 @@ module Linkedcare
       # app_dir = Linkedcare::Configuration.config.app_dir
       # raise ArgumentError, "#{app_dir} does not exist" unless File.exist?(app_dir)
       app_dir = '.'
-      require File.expand_path("#{app_dir}/config/environment.rb")
-      ::Rails.application.eager_load!
+      # require File.expand_path("#{app_dir}/config/environment.rb")
+      # ::Rails.application.eager_load!
     end
 
     def parse_options(argv)

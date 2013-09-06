@@ -9,7 +9,15 @@ module Linkedcare
       password 'guest'
       vhost '/'
       bus 'bus'
-      heartbeat 20
+      heartbeat 60
+    end
+
+    def symbolize_options
+      result = { }
+      options.each do |key, value|
+        result[key.to_sym] = value
+      end
+      result
     end
 
     def to_s

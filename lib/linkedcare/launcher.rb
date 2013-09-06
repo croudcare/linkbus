@@ -11,8 +11,8 @@ module Linkedcare
     def from_cli
       log_info("Launching Linkbus EM")
       EM.run do 
-        options = Linkedcare::Configuration.amqp_options
-        log_info("Connecting with #{options}")
+        options = Linkedcare::Configuration.amqp.symbolize_options
+        log_info("Connecting with #{ options }")
         AMQP.connect(options) do |connection|
           connection_handler(connection)
         end

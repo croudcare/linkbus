@@ -1,6 +1,5 @@
-require 'active_support'
-require 'active_support/core_ext/hash/indifferent_access'
 require 'yaml'
+require 'pry'
 
 module Linkedcare
   module Configuration
@@ -52,7 +51,7 @@ module Linkedcare
     end
 
     def self.load_amqp_configurations(options)
-      @amqp_config =  Linkedcare::Options::AMQP.new(options)
+      @amqp_config =  Linkedcare::Options::AMQP.new(options[:amqp])
     end
 
     def self.load_file(env, path)

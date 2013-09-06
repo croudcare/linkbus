@@ -13,9 +13,5 @@ module Linkedcare
       "{ config_file: [ #{config_file} ], log_file: [ #{log_file} ], environment [ #{environment}], log_level [ #{log_level} ] } }"
     end
 
-    def amqp
-      Options::AMQP.new(options[:amqp].with_indifferent_access)
-    end
-
   end #linkbus class
 end #linkbus module

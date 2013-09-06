@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/linkedcare/cli'
+$LINKBUS_CLI = true
 
 begin
-  $LINKBUS_CLI = true
   cli = Linkedcare::CLI.instance
-  cli.parse
+  cli.parse(ARGV)
   cli.run
 rescue => e
   raise e if $DEBUG

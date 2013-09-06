@@ -1,3 +1,4 @@
+
 module Linkedcare
 
   class OptionsBuilder
@@ -10,7 +11,7 @@ module Linkedcare
     
     attr_reader :options
     def initialize
-      @options = {}
+      @options = {}.with_indifferent_access
     end
 
     def method_missing(method, *args, &block)
@@ -23,7 +24,7 @@ module Linkedcare
     # When some other kinds of argument be necessary
     # build here
     def argument(args)
-      args.first.to_s
+      args.first
     end
 
   end
@@ -35,7 +36,7 @@ module Linkedcare
     end
 
     def self.default_options
-      @options || {}
+      @options || {}.with_indifferent_access
     end 
 
     def method_missing(method, *args, &block)
@@ -45,10 +46,6 @@ module Linkedcare
       else
         options[method]
       end
-    end
-
-    def merge(values)
-      options.merge(values)
     end
 
     attr_accessor :options
