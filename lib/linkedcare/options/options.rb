@@ -1,4 +1,3 @@
-
 module Linkedcare
 
   class OptionsBuilder

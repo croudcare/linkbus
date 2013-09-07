@@ -10,10 +10,7 @@ require 'linkedcare/version'
 require 'linkedcare/logging'
 
 #Configuration Options
-require 'linkedcare/options/options'
-require 'linkedcare/options/amqp'
-require 'linkedcare/options/runtime'
-require 'linkedcare/configuration'
+require 'linkedcare/options/setup'
 
 #linkbus Launcher
 require 'linkedcare/launcher'
