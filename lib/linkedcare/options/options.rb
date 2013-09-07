@@ -21,7 +21,7 @@ module Linkedcare
     # Right now we only use one arguments
     # and the argument is a String.
     # When some other kinds of argument be necessary
-    # build here
+    # build here.
     def argument(args)
       args.first
     end

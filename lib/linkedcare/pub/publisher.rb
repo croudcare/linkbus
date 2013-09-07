@@ -9,6 +9,7 @@ module Linkedcare
       
       attr_accessor :errors
       def initialize
+        Linkedcare::Configuration.setup?
         @config = Linkedcare::Configuration.amqp
         @errors = []
       end

@@ -6,7 +6,7 @@ module Linkedcare
       config_file "config/linkbus.yml"
       log_file    "log/linkbus.log"
       log_level    0 
-      environment "development"
+      environment  defined?(::Rails) ? ::Rails.env : "development"
     end
 
     def to_s

@@ -2,14 +2,16 @@ module Linkedcare
 
   class Options::AMQP < Linkedcare::Options
     
-    defaults do 
-      host '127.0.0.1'
-      port 5672
-      user 'guest'
+    defaults do
+
+      host     '127.0.0.1'
+      port      5672
+      user     'guest'
       password 'guest'
-      vhost '/'
-      bus 'bus'
-      heartbeat 60
+      vhost    '/'
+      bus      'bus'
+      heartbeat 60 # 1 min to avoid NAT/Firewalls close connection for innactivity.
+    
     end
 
     def symbolize_options
