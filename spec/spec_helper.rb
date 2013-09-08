@@ -1,4 +1,4 @@
-require 'linkedcare/bus'
+require 'linkbus'
 
 def expect_subscriber(subscriber, pattern, handler, queue)
   expect(subscriber.key).to eql(pattern)

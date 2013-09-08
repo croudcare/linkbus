@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Linkedcare::Bus::ConnectionHandler do
+describe Linkedcare::Connection::Handler do
 
   module AMQP
     class Channel
@@ -11,7 +11,7 @@ describe Linkedcare::Bus::ConnectionHandler do
 
   before(:each) do
     config_file = File.expand_path('../fixtures/config/connection_config.yml', File.dirname(__FILE__))
-    @options = Linkedcare::Configuration.config('test', config_file).amqp.options
+    @options = Linkedcare::Configuration.setup(:environment => 'test', :config_file => config_file).amqp.options
   end
 
   it "register one subscribers" do

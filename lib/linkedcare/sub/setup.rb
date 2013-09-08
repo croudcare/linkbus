@@ -6,7 +6,7 @@ require 'linkedcare/sub/manager'
 require 'linkedcare/sub/subscriber'
 require 'linkedcare/connection/handler'
 
-if !$LINKBUS_CLI
+if !!$LINKBUS_CLI
   puts "TO FIX"
   configuration = Linkedcare::Configuration.setup
   Linkedcare::Logging.setup(configuration.log_file, configuration.log_level)

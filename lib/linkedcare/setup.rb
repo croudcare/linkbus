@@ -15,6 +15,4 @@ require 'linkedcare/options/setup'
 #linkbus Launcher
 require 'linkedcare/launcher'
 
-#publishers
-require 'linkedcare/pub/publisher'
-
+require 'linkedcare/sub/setup'

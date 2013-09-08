@@ -7,18 +7,18 @@ describe Linkedcare::Configuration do
   end
 
   it 'loads from file' do
-    config = subject.config('test', @config_file)
+    config = subject.setup(:environment => 'test', :config_file => @config_file)
     expected_test_env(config.amqp)
   end
 
   it 'returns the same configuration' do
-    expected = subject.config('default', @config_file)
-    actual   = subject.config('default', @config_file)
+    expected = subject.setup(:environment => 'default', :config_file =>@config_file)
+    actual   = subject.setup(:environment => 'default', :config_file => @config_file)
     expect(actual).to eql(expected)
   end
 
   it 'returns the options as hash' do
-    config = subject.config('test', @config_file)
+    config = subject.setup(:environment => 'test', :config_file =>@config_file)
     options = subject.amqp_options
 
     expect(options[:host]).to eql('192.168.0.2')
