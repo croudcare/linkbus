@@ -16,6 +16,7 @@ module Linkedcare
       Linkedcare::Logging.setup(configuration.log_file, configuration.log_level)      
       log_info("Booting your application with configuration: #{Linkedcare::Configuration.runtime} --- #{Linkedcare::Configuration.amqp}")
       booting_the_fOcking_system #ow yeah
+      write_pid
     end
 
     def run
@@ -29,6 +30,14 @@ module Linkedcare
       app_dir = '.'
       require File.expand_path("#{app_dir}/config/environment.rb")
       ::Rails.application.eager_load!
+    end
+
+    def write_pid
+      folder = "./tmp/pids"
+      FileUtils.mkdir_p folder
+      File.open("#{folder}/linkbus.pid", 'w') do |f|
+        f.puts Process.pid
+      end
     end
 
     def parse_options(argv)
