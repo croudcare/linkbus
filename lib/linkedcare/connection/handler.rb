@@ -47,7 +47,7 @@ module Linkedcare
           begin
             subscriber.handler.call(meta, data)
           rescue Exception => e
-            log_error("FAILED SUBSCRIBER:  Queue [ #{queue} ]  Payload [ #{data} ]     ")
+            log_error("FAILED SUBSCRIBER:  Subscriber [ #{subscriber} ]  Payload [ #{data} ] ",  e)
           ensure
             meta.ack
           end
