@@ -44,8 +44,13 @@ module Linkedcare
       def subscribe(queue, subscriber)
         queue.subscribe(:ack => true) do |meta, data|
           log_info("Message Received: [ #{ data } ], Meta: [ #{ meta } ], Subscriber: #{ subscriber }")
-          subscriber.handler.call(meta, data)
-          meta.ack
+          begin
+            subscriber.handler.call(meta, data)
+          rescue Exception => e
+            log_error("FAILED SUBSCRIBER:  Queue [ #{queue} ]  Payload [ #{data} ]     ")
+          ensure
+            meta.ack
+          end
         end
       end
     end
